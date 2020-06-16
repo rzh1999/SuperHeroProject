@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SuperHero.Data;
+using SuperHero.Data.Migrations;
+using SuperHero.Models;
 
 namespace SuperHero.Controllers
 {
@@ -38,12 +40,12 @@ namespace SuperHero.Controllers
         // POST: SuperHero/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(SuperHeroModel superHeroModel)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                _context.SuperHeroes.Add(superHeroModel);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
