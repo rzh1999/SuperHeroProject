@@ -46,7 +46,7 @@ namespace SuperHero.Controllers
             {
                 _context.SuperHeroes.Add(superHeroModel);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
             catch
             {
