@@ -22,12 +22,14 @@ namespace SuperHero.Controllers
         // GET: SuperHero
         public ActionResult Index()
         {
-            return View();
+            var listOfHeroes = _context.SuperHeroes.ToList();
+            return View(listOfHeroes);
         }
 
         // GET: SuperHero/Details/5
         public ActionResult Details(int id)
         {
+            //query the superheroes table where id == hero.ID
             return View();
         }
 
@@ -57,7 +59,8 @@ namespace SuperHero.Controllers
         // GET: SuperHero/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+                //var heroToEdit = _context.SuperHeroes.Where(s => s.Id == id).FirstOrDefault();       
+                return View();
         }
 
         // POST: SuperHero/Edit/5
