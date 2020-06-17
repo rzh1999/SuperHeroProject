@@ -59,25 +59,27 @@ namespace SuperHero.Controllers
         // GET: SuperHero/Edit/5
         public ActionResult Edit(int id)
         {
-                //var heroToEdit = _context.SuperHeroes.Where(s => s.Id == id).FirstOrDefault();       
-                return View();
+                var heroToEdit = _context.SuperHeroes.Where(s => s.Id == id).FirstOrDefault();
+                return View(heroToEdit);
         }
 
         // POST: SuperHero/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(SuperHeroModel superHeroModel)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var superHeroModelInDb = _context.SuperHeroes.Where(s => s.Id == superHeroModel.Id).Single();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            superHeroModelInDb.name = superHeroModel.name;
+            superHeroModelInDb.primaryAbility = superHeroModel.primaryAbility;
+            superHeroModelInDb.secondaryAbility = superHeroModel.secondaryAbility;
+            superHeroModelInDb.catchPhrase = superHeroModel.catchPhrase;
+            superHeroModelInDb.alterEgo = superHeroModel.alterEgo;
+
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+            
         }
 
         // GET: SuperHero/Delete/5
